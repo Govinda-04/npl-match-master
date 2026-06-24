@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% set active = "home" %}
+
+{% block title %}NPL Match Master — AI Cricket Predictions{% endblock %}
+
+{% block content %}
+
+<!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg">
+    <!-- Cricket ground SVG illustration -->
+    <svg class="ground-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outfield -->
+      <ellipse cx="400" cy="220" rx="380" ry="200" fill="#1a5c32" opacity="0.6"/>
+      <!-- Inner circle -->
+      <ellipse cx="400" cy="220" rx="200" ry="110" fill="#2e8b57" opacity="0.5"/>
+      <!-- Pitch -->
+      <rect x="370" y="140" width="60" height="160" rx="4" fill="#c8a96e" opacity="0.7"/>
+      <!-- Crease lines -->
+      <line x1="360" y1="165" x2="440" y2="165" stroke="#fff" stroke-width="2" opacity="0.8"/>
+      <line x1="360" y1="275" x2="440" y2="275" stroke="#fff" stroke-width="2" opacity="0.8"/>
+      <!-- Stumps top -->
+      <rect x="388" y="155" width="4" height="18" fill="#f0c040"/>
+      <rect x="398" y="155" width="4" height="18" fill="#f0c040"/>
+      <rect x="408" y="155" width="4" height="18" fill="#f0c040"/>
+      <!-- Stumps bottom -->
+      <rect x="388" y="277" width="4" height="18" fill="#f0c040"/>
+      <rect x="398" y="277" width="4" height="18" fill="#f0c040"/>
+      <rect x="408" y="277" width="4" height="18" fill="#f0c040"/>
+      <!-- Ball -->
+      <circle cx="320" cy="190" r="12" fill="#cc2200" opacity="0.9"/>
+      <path d="M312 186 Q320 182 328 186" stroke="#fff" stroke-width="1.5" fill="none"/>
+      <path d="M312 194 Q320 198 328 194" stroke="#fff" stroke-width="1.5" fill="none"/>
+      <!-- Boundary rope dots -->
+      <circle cx="50" cy="220" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="120" cy="80" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="280" cy="30" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="520" cy="30" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="680" cy="80" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="750" cy="220" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="680" cy="360" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="520" cy="410" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="280" cy="410" r="4" fill="#d4a017" opacity="0.6"/>
+      <circle cx="120" cy="360" r="4" fill="#d4a017" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🇳🇵 Nepal Premier League</div>
+    <h1 class="hero-title">Predict the Game<br><span class="hero-accent">Before It Happens</span></h1>
+    <p class="hero-subtitle">
+      AI-powered match predictions using real NPL ball-by-ball data.
+      Know the winning probability and projected score in real time.
+    </p>
+    <div class="hero-actions">
+      <a href="/predict" class="btn btn-primary">Start Predicting</a>
+      <a href="/about" class="btn btn-outline">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats Bar ──────────────────────────────────────────────────────────── -->
+<section class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-number">64</span>
+    <span class="stat-label">NPL Matches</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-number">8</span>
+    <span class="stat-label">Teams</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-number">3</span>
+    <span class="stat-label">ML Models</span>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <span class="stat-number">80%+</span>
+    <span class="stat-label">Accuracy</span>
+  </div>
+</section>
+
+<!-- ── Features ──────────────────────────────────────────────────────────── -->
+<section class="features-section">
+  <div class="section-header">
+    <h2>What Can You Predict?</h2>
+    <p>Two powerful AI tools built on real NPL match data</p>
+  </div>
+  <div class="features-grid">
+
+    <div class="feature-card">
+      <div class="feature-icon">🏆</div>
+      <h3>Victory Predictor</h3>
+      <p>Enter the current match state in the 2nd innings — runs left, balls remaining, wickets in hand — and get the winning probability for both teams instantly.</p>
+      <ul class="feature-list">
+        <li>✓ Logistic Regression model</li>
+        <li>✓ Random Forest model</li>
+        <li>✓ Side-by-side comparison</li>
+        <li>✓ Visual pie chart</li>
+      </ul>
+      <a href="/predict#win" class="btn btn-card">Try Victory Predictor →</a>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Score Predictor</h3>
+      <p>During the 1st innings, input the current score, run rate, and match situation to predict the final innings total your team will post.</p>
+      <ul class="feature-list">
+        <li>✓ XGBoost Regression model</li>
+        <li>✓ Real-time prediction</li>
+        <li>✓ Current vs predicted chart</li>
+        <li>✓ MAE under 5 runs</li>
+      </ul>
+      <a href="/predict#score" class="btn btn-card">Try Score Predictor →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Teams Section ──────────────────────────────────────────────────────── -->
+<section class="teams-section">
+  <div class="section-header">
+    <h2>NPL 2024 &amp; 2025 Teams</h2>
+    <p>All 8 franchises covered in our prediction models</p>
+  </div>
+  <div class="teams-grid">
+    {% set teams = [
+      ("BK", "Biratnagar Kings", "#cc2200"),
+      ("CR", "Chitwan Rhinos", "#006633"),
+      ("JB", "Janakpur Bolts", "#0055aa"),
+      ("KY", "Karnali Yaks", "#884400"),
+      ("KG", "Kathmandu Gurkhas", "#333399"),
+      ("LL", "Lumbini Lions", "#cc7700"),
+      ("PA", "Pokhara Avengers", "#006699"),
+      ("SR", "Sudurpaschim Royals", "#660066"),
+    ] %}
+    {% for abbr, name, color in teams %}
+    <div class="team-card">
+      <div class="team-badge" data-color="{{ color }}">{{ abbr }}</div>
+      <span class="team-name">{{ name }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────────────────────────────── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Ready to Predict?</h2>
+    <p>Use real NPL data to forecast match outcomes with AI</p>
+    <a href="/predict" class="btn btn-primary btn-lg">Open Predictor</a>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.querySelectorAll('.team-badge[data-color]').forEach(function(el) {
+    el.style.background = el.dataset.color;
+  });
+</script>
+{% endblock %}

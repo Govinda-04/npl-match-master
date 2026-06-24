@@ -1,0 +1,8 @@
+match_id,season,venue,start_date,innings,balls,batting_team,bowling_team,cur_score,crr,balls_left,wicket_left,last_5_ov,city,total_score
+1,2023,TU Cricket Ground,2023-01-10,1,60,Kathmandu Kings,Pokhara Avengers,85,8.5,60,6,42,Kathmandu,148
+2,2023,Pokhara Stadium,2023-01-12,1,72,Lalitpur Patriots,Biratnagar Warriors,95,7.9,48,7,38,Pokhara,162
+3,2023,Mulpani Cricket Ground,2023-01-14,2,54,Chitwan Tigers,Rupandehi Royals,70,7.8,66,8,35,Lalitpur,140
+4,2023,TU Cricket Ground,2023-01-16,1,66,Biratnagar Warriors,Kathmandu Kings,90,8.2,54,5,40,Kathmandu,155
+1,2023,TU Cricket Ground,2023-01-10,1,60,Kathmandu Kings,Pokhara Avengers,85,8.5,60,6,42,Kathmandu,148
+5,2023,Pokhara Stadium,2023-01-18,1,48,,Lalitpur Patriots,60,7.5,72,9,30,Pokhara,130
+6,2023,Mulpani Cricket Ground,2023-01-20,2,78,Rupandehi Royals,Chitwan Tigers,100,7.7,42,6,45,Bharatpur,

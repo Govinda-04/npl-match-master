@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% set active = "about" %}
+
+{% block title %}About — NPL Match Master{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1>📖 About NPL Match Master</h1>
+    <p>How we built AI-powered predictions for Nepal Premier League cricket</p>
+  </div>
+</div>
+
+<main class="about-page">
+
+  <!-- ── Project Overview ──────────────────────────────────────────────── -->
+  <section class="about-section">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>What is NPL Match Master?</h2>
+        <p>NPL Match Master is a machine learning web application that predicts cricket match outcomes for the Nepal Premier League (NPL). It uses real ball-by-ball data from the 2024 and 2025 NPL seasons to train predictive models.</p>
+        <p>The system provides two core predictions: the likely final score of an ongoing 1st innings, and the winning probability for each team during the 2nd innings chase.</p>
+      </div>
+      <div class="about-visual">
+        <!-- Cricket bat SVG -->
+        <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg" class="about-svg">
+          <rect x="85" y="20" width="30" height="180" rx="8" fill="#c8a96e"/>
+          <rect x="80" y="190" width="40" height="70" rx="6" fill="#8B6914"/>
+          <rect x="88" y="195" width="24" height="60" rx="4" fill="#a07820"/>
+          <line x1="100" y1="20" x2="100" y2="190" stroke="#a07820" stroke-width="2"/>
+          <circle cx="140" cy="100" r="18" fill="#cc2200"/>
+          <path d="M130 96 Q140 90 150 96" stroke="#fff" stroke-width="2" fill="none"/>
+          <path d="M130 104 Q140 110 150 104" stroke="#fff" stroke-width="2" fill="none"/>
+          <!-- Stumps -->
+          <rect x="70" y="260" width="6" height="30" rx="2" fill="#f0c040"/>
+          <rect x="97" y="260" width="6" height="30" rx="2" fill="#f0c040"/>
+          <rect x="124" y="260" width="6" height="30" rx="2" fill="#f0c040"/>
+          <rect x="65" y="258" width="70" height="5" rx="2" fill="#d4a017"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How It Works ──────────────────────────────────────────────────── -->
+  <section class="about-section alt-bg">
+    <h2 class="section-center">How It Works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Data Collection</h3>
+        <p>Ball-by-ball data from 32 NPL 2024 matches covering all deliveries, runs, wickets, and match outcomes.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Feature Engineering</h3>
+        <p>Each delivery is transformed into match-state features: current score, run rate, balls remaining, wickets left, and last 5 overs runs.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Model Training</h3>
+        <p>Three ML models are trained: XGBoost Regression for score prediction, Logistic Regression and Random Forest for win probability.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Live Prediction</h3>
+        <p>Enter the current match state and get instant predictions served through a Flask API with a real-time web interface.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Models ────────────────────────────────────────────────────────── -->
+  <section class="about-section">
+    <h2 class="section-center">The Models</h2>
+    <div class="models-grid">
+      <div class="model-card">
+        <div class="model-icon">🎯</div>
+        <h3>XGBoost Regressor</h3>
+        <p class="model-use">Score Prediction</p>
+        <p>Gradient boosting model that predicts the final innings total. Trained on 1st innings ball-by-ball data with features like current score, CRR, and balls remaining.</p>
+        <div class="model-metric">MAE &lt; 5 runs</div>
+      </div>
+      <div class="model-card">
+        <div class="model-icon">📈</div>
+        <h3>Logistic Regression</h3>
+        <p class="model-use">Win Probability</p>
+        <p>Binary classifier that estimates the probability of the batting team winning the chase. Fast, interpretable, and provides calibrated probabilities.</p>
+        <div class="model-metric">~80% accuracy</div>
+      </div>
+      <div class="model-card">
+        <div class="model-icon">🌲</div>
+        <h3>Random Forest</h3>
+        <p class="model-use">Win Probability</p>
+        <p>Ensemble of decision trees that captures complex non-linear relationships between match state and outcome. Robust to overfitting on small datasets.</p>
+        <div class="model-metric">High precision</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tech Stack ────────────────────────────────────────────────────── -->
+  <section class="about-section alt-bg">
+    <h2 class="section-center">Technology Stack</h2>
+    <div class="tech-grid">
+      <div class="tech-item"><span class="tech-icon">🐍</span><span>Python 3.12</span></div>
+      <div class="tech-item"><span class="tech-icon">⚗️</span><span>Flask</span></div>
+      <div class="tech-item"><span class="tech-icon">🤖</span><span>scikit-learn</span></div>
+      <div class="tech-item"><span class="tech-icon">⚡</span><span>XGBoost</span></div>
+      <div class="tech-item"><span class="tech-icon">🐼</span><span>pandas</span></div>
+      <div class="tech-item"><span class="tech-icon">📊</span><span>Chart.js</span></div>
+      <div class="tech-item"><span class="tech-icon">🎨</span><span>HTML/CSS/JS</span></div>
+      <div class="tech-item"><span class="tech-icon">💾</span><span>joblib</span></div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────────────────────── -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Try the Predictor</h2>
+      <p>Put the models to the test with real match scenarios</p>
+      <a href="/predict" class="btn btn-primary btn-lg">Open Predictor</a>
+    </div>
+  </section>
+
+</main>
+{% endblock %}

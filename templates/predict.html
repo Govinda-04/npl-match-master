@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% set active = "predict" %}
+
+{% block title %}Predict — NPL Match Master{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1>🏏 Match Predictor</h1>
+    <p>Enter the current match situation to get AI-powered predictions</p>
+  </div>
+</div>
+
+<main class="predict-page">
+
+  <!-- ── NPL Victory Predictor ─────────────────────────────────────────── -->
+  <section class="panel" id="win">
+    <div class="panel-header">
+      <div class="panel-icon">🏆</div>
+      <div>
+        <h2>NPL Victory Predictor</h2>
+        <p class="panel-desc">2nd innings — predict which team will win</p>
+      </div>
+    </div>
+
+    <form id="win-form" novalidate>
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="win-batting-team">Batting Team</label>
+          <select id="win-batting-team" name="batting_team" required>
+            <option value="">Select team…</option>
+            <option>Biratnagar Kings</option>
+            <option>Chitwan Rhinos</option>
+            <option>Janakpur Bolts</option>
+            <option>Karnali Yaks</option>
+            <option>Kathmandu Gurkhas</option>
+            <option>Lumbini Lions</option>
+            <option>Pokhara Avengers</option>
+            <option>Sudurpaschim Royals</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="win-bowling-team">Bowling Team</label>
+          <select id="win-bowling-team" name="bowling_team" required>
+            <option value="">Select team…</option>
+            <option>Biratnagar Kings</option>
+            <option>Chitwan Rhinos</option>
+            <option>Janakpur Bolts</option>
+            <option>Karnali Yaks</option>
+            <option>Kathmandu Gurkhas</option>
+            <option>Lumbini Lions</option>
+            <option>Pokhara Avengers</option>
+            <option>Sudurpaschim Royals</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="win-city">City</label>
+          <select id="win-city" name="city" required>
+            <option value="">Select city…</option>
+            <option>Kathmandu</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="win-runs-left">Runs Left</label>
+          <input id="win-runs-left" name="runs_left" type="number" min="0" placeholder="e.g. 45" required>
+        </div>
+
+        <div class="form-group">
+          <label for="win-balls-left">Balls Left</label>
+          <input id="win-balls-left" name="balls_left" type="number" min="0" placeholder="e.g. 30" required>
+        </div>
+
+        <div class="form-group">
+          <label for="win-wickets-left">Wickets Left</label>
+          <input id="win-wickets-left" name="wickets_left" type="number" min="0" max="10" placeholder="e.g. 6" required>
+        </div>
+
+        <div class="form-group">
+          <label for="win-total-score">Total Score / Target</label>
+          <input id="win-total-score" name="total_score" type="number" min="0" placeholder="e.g. 165" required>
+        </div>
+
+        <div class="form-group">
+          <label for="win-crr">CRR — Current Run Rate</label>
+          <input id="win-crr" name="crr" type="number" min="0" step="0.01" placeholder="e.g. 8.50" required>
+        </div>
+
+        <div class="form-group">
+          <label for="win-rrr">RRR — Required Run Rate</label>
+          <input id="win-rrr" name="rrr" type="number" min="0" step="0.01" placeholder="e.g. 9.00" required>
+        </div>
+
+        <div class="form-group full-width">
+          <button type="submit" class="btn btn-primary btn-full">Predict Winning Probability</button>
+        </div>
+
+      </div>
+    </form>
+
+    <div id="win-spinner" class="spinner-wrap"><div class="spinner"></div></div>
+    <div id="win-error" class="error-msg"></div>
+
+    <div id="win-result" class="result-section">
+      <div class="prob-row">
+        <div class="prob-card">
+          <div class="model-label">Logistic Regression</div>
+          <div class="team-name" id="lr-bat-name">Batting Team</div>
+          <div class="prob-value" id="lr-bat-prob">—</div>
+        </div>
+        <div class="prob-card">
+          <div class="model-label">Logistic Regression</div>
+          <div class="team-name" id="lr-bowl-name">Bowling Team</div>
+          <div class="prob-value" id="lr-bowl-prob">—</div>
+        </div>
+      </div>
+      <div class="prob-row">
+        <div class="prob-card">
+          <div class="model-label">Random Forest</div>
+          <div class="team-name" id="rf-bat-name">Batting Team</div>
+          <div class="prob-value" id="rf-bat-prob">—</div>
+        </div>
+        <div class="prob-card">
+          <div class="model-label">Random Forest</div>
+          <div class="team-name" id="rf-bowl-name">Bowling Team</div>
+          <div class="prob-value" id="rf-bowl-prob">—</div>
+        </div>
+      </div>
+      <div class="chart-wrap"><canvas id="win-chart"></canvas></div>
+    </div>
+  </section>
+
+
+  <!-- ── NPL Score Predictor ────────────────────────────────────────────── -->
+  <section class="panel" id="score">
+    <div class="panel-header">
+      <div class="panel-icon">📊</div>
+      <div>
+        <h2>NPL Score Predictor</h2>
+        <p class="panel-desc">1st innings — predict the final innings total</p>
+      </div>
+    </div>
+
+    <form id="score-form" novalidate>
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="score-batting-team">Batting Team</label>
+          <select id="score-batting-team" name="batting_team" required>
+            <option value="">Select team…</option>
+            <option>Biratnagar Kings</option>
+            <option>Chitwan Rhinos</option>
+            <option>Janakpur Bolts</option>
+            <option>Karnali Yaks</option>
+            <option>Kathmandu Gurkhas</option>
+            <option>Lumbini Lions</option>
+            <option>Pokhara Avengers</option>
+            <option>Sudurpaschim Royals</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="score-bowling-team">Bowling Team</label>
+          <select id="score-bowling-team" name="bowling_team" required>
+            <option value="">Select team…</option>
+            <option>Biratnagar Kings</option>
+            <option>Chitwan Rhinos</option>
+            <option>Janakpur Bolts</option>
+            <option>Karnali Yaks</option>
+            <option>Kathmandu Gurkhas</option>
+            <option>Lumbini Lions</option>
+            <option>Pokhara Avengers</option>
+            <option>Sudurpaschim Royals</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="score-venue">Venue</label>
+          <select id="score-venue" name="venue" required>
+            <option value="">Select venue…</option>
+            <option>Tribhuvan University International Cricket Ground, Kirtipur</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="score-city">City</label>
+          <select id="score-city" name="city" required>
+            <option value="">Select city…</option>
+            <option>Kathmandu</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="score-cur-score">Current Score</label>
+          <input id="score-cur-score" name="cur_score" type="number" min="0" placeholder="e.g. 95" required>
+        </div>
+
+        <div class="form-group">
+          <label for="score-crr">CRR — Current Run Rate</label>
+          <input id="score-crr" name="crr" type="number" min="0" step="0.01" placeholder="e.g. 9.50" required>
+        </div>
+
+        <div class="form-group">
+          <label for="score-balls-left">Balls Left</label>
+          <input id="score-balls-left" name="balls_left" type="number" min="0" placeholder="e.g. 60" required>
+        </div>
+
+        <div class="form-group">
+          <label for="score-wickets-left">Wickets Left</label>
+          <input id="score-wickets-left" name="wicket_left" type="number" min="0" max="10" placeholder="e.g. 7" required>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="score-last5">Last 5 Overs Score</label>
+          <input id="score-last5" name="last_5_ov" type="number" min="0" placeholder="e.g. 52" required>
+        </div>
+
+        <div class="form-group full-width">
+          <button type="submit" class="btn btn-primary btn-full">Predict Final Score</button>
+        </div>
+
+      </div>
+    </form>
+
+    <div id="score-spinner" class="spinner-wrap"><div class="spinner"></div></div>
+    <div id="score-error" class="error-msg"></div>
+
+    <div id="score-result" class="result-section">
+      <div class="score-display">
+        <div class="score-label">Predicted Final Score</div>
+        <div class="score-value" id="predicted-score-value">—</div>
+      </div>
+      <div class="chart-wrap"><canvas id="score-chart"></canvas></div>
+    </div>
+  </section>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/win.js"></script>
+<script src="/static/score.js"></script>
+{% endblock %}
